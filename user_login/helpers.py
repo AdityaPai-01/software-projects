@@ -16,6 +16,7 @@ DataDir = BaseDirectory / "data"
 DataDir.mkdir(parents=True, exist_ok=True)
 User_Manager = UserManager()
 JSON_Storage = JSONStorage(DataDir)
+User_Manager.importData(JSON_Storage.load_data())
 Log_Manager = LogManager(DataDir)
 
 def clear():
@@ -68,6 +69,7 @@ def regiser():
             Log_Manager.writer(f"{clear()} HP60-70")
             break
         Password = input("Enter password: ")
+        User_Manager.authdata()
         RegisterMethod = User_Manager.register(Username, Password)
         Log_Manager.writer(RegisterMethod[0] + " HP 70-80")
         print(RegisterMethod[0])
