@@ -6,7 +6,6 @@ import sys
 from manager.user_manager import UserManager
 from manager.data_manager import JSONStorage
 from manager.log_manager import LogManager
-from model.logger import *
 
 if getattr(sys, 'frozen', False): #Running script as .exe
     BaseDirectory = Path(sys.executable).resolve().parent
