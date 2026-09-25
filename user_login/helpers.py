@@ -23,7 +23,7 @@ def clear():
 def login():
     while True:
         Username = input("Enter your username: ")
-        if Username == '--q':
+        if Username == '!Q':
             clear()
             return False
         Password = input("Enter your password: ")
