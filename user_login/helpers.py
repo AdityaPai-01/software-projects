@@ -45,6 +45,7 @@ def regiser():
         print(RegisterMethod["message"]), time.sleep(2), print("Please login again."), time.sleep(2)
         clear()
         if RegisterMethod["status"]:
+            User_Manager.authdata()
             return True
 
 def savedata():
