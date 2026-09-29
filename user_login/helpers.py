@@ -20,13 +20,26 @@ def clear():
     os.system('cls' if os.name == 'nt' else 'clear')
     return "1: clear terminal executed"
 
+def check_username_validity(username):
+    if not username:
+        return {"message": "Please enter valid username!",
+                "status": False}
+    elif len(username) < 8 or len(username) > 20:
+        return {"message": "Your username must contain minimum 8 characters and maximum 20 characters!",
+                "status": False}
+    elif any(not (character.isalnum() or character in "._") for character in username):
+        return {"message": "Special characters except '.' and '_' aren't allowed in usernames!",
+                "status": False}
+    return {"message": None,
+            "status": True}
+
 def login():
     while True:
-        Username = input("Enter your username: ")
+        Username = input("Enter your username: ").strip()
         if Username == '!Q':
             clear()
             return False
-        Password = input("Enter your password: ")
+        Password = input("Enter your password: ").strip()
         LoginMethod = User_Manager.login(Username, Password)
         print(LoginMethod["message"])
         time.sleep(1)
@@ -36,11 +49,17 @@ def login():
 
 def regiser():
     while True:
-        Username = input("Enter username: ")
+        Username = input("Enter username: ").strip()
         if Username == '!Q':
             clear()
             return True
-        Password = input("Enter password: ")
+
+        username_validity = check_username_validity(Username)
+        print(username_validity["message"] if username_validity["message"] is not None else "-" * 15)
+        if not username_validity["status"]:
+            continue
+
+        Password = input("Enter password: ").strip()
         RegisterMethod = User_Manager.register(Username, Password)
         print(RegisterMethod["message"]), time.sleep(2), print("Please login again."), time.sleep(2)
         clear()
